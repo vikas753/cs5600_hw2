@@ -23,27 +23,26 @@ main(int argc, char* argv[])
   }
   else
   { 
-    printf("%s" , argv[2]);
     if(strcmp(argv[2], "+") || strcmp(argv[2], "*") ||  strcmp(argv[2], "/") || strcmp(argv[2], "-") )
     {
       int op1 = atoi(argv[1]);
       int op2 = atoi(argv[3]);
 
-      if(strcmp(argv[2], "+"))
+      if(argv[2][0] == '+')
       {
-        printf(" %ld + %ld = %ld " , op1 , op2 , (op1 + op2)); 
+        printf("%ld + %ld = %ld \n" , op1 , op2 , (op1 + op2)); 
       }
-      else if(strcmp(argv[2], "*"))
+      else if(argv[2][0] == '*')
       {
-	 printf(" %ld * %ld = %ld " , op1 , op2 , (op1 * op2)); 
+	 printf("%ld * %ld = %ld \n" , op1 , op2 , (op1 * op2)); 
       }
-      else if(strcmp(argv[2], "-"))
+      else if(argv[2][0] == '-')
       {
-         printf(" %ld - %ld = %ld " , op1 , op2 , (op1 - op2)); 
+         printf("%ld - %ld = %ld \n" , op1 , op2 , (op1 - op2)); 
       }      
-      else if(strcmp(argv[2], "/"))
+      else if(argv[2][0] == '/')
       {
-	 printf(" %ld / %ld = %ld " , op1 , op2 , (op1 / op2)); 
+	 printf("%ld / %ld = %ld \n" , op1 , op2 , (op1 / op2)); 
       }
       else
       {
