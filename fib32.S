@@ -11,29 +11,10 @@
 # note : For every call of a function or subroutine it is preceded by
 # push and pop of registers it would be using ( basically we are using
 # caller save convention )
-
-/*
-long fib(long arg)
-{
-  if(arg == 0)
-  { 
-    return 0;
-  }	  
-  else if(arg == 1)
-  {
-    return 1;
-  }
-  else
-  {
-    return fib(arg-1) + fib(arg-2);	  
-  }
-}
-*/
-
 fib:
   enter $0 , $0
   
-  mov 8(%ebp) , %ebx   ## arg : %ebx
+  mov 8(%ebp) , %ebx
   cmp $0 , %ebx  # Check if the argument is zero then return 0 as result
   je .zeroLabel
   cmp $1 , %ebx   # Check if the argument is one then return 1 as result

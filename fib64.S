@@ -8,30 +8,12 @@
   .global main
 
   .text
-/*
-long fib(long arg)
-{
-  if(arg == 0)
-  { 
-    return 0;
-  }	  
-  else if(arg == 1)
-  {
-    return 1;
-  }
-  else
-  {
-    return fib(arg-1) + fib(arg-2);	  
-  }
-}
-*/
-
 fib:
   enter $0 , $0
   push %rbx
   push %rcx
   mov $0 , %rbx
-  cmp %rbx , %rdi  # Check if an argument is >= 0 , rdx : arg
+  cmp %rbx , %rdi  # Check if an argument is >= 0 
   je .zeroLabel     # if arg == 0 , then return 0
 
   mov $1 , %rbx
@@ -60,38 +42,20 @@ fib:
   pop %rcx
   pop %rbx
   leave 
-  ret
- 
-/*
-int
-main(int argc, char* argv[])
-{
-    long xx = atol(argv[1]);
-    if(xx < 0)
-    {
-      printf("Usage: ./fib N , where N >= 0 \n");	    
-    }
-    else
-    {    
-      long fibResult = fib(xx);
-      printf("fib(%ld) = %ld\n", xx , fibResult);
-    }
-    return 0;
-}
-*/
+  ret 
 
 main:
   enter $0, $0
   mov 8(%rsi) , %rdi
   mov $0 , %rbx
   call atol 
-  mov %rax, %rdi     ## variable xx
+  mov %rax, %rdi
   cmp %rbx , %rdi    ## Check if the source argument is >= 0 else goto usage .
    
   jl .usageLabel  
   mov %rdi , %r8
   call fib
-  mov %rax , %rdx    ## rax : fibResult
+  mov %rax , %rdx
   mov %r8 , %rsi
   mov $output_fmt, %rdi
   mov $0, %al
