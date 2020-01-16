@@ -7,6 +7,50 @@
 
   .global main
 
+#if 0
+long fib(long arg)
+{
+  if(arg == 0)
+  { 
+    return 0;
+  }	  
+  else if(arg == 1)
+  {
+    return 1;
+  }
+  else
+  {
+    return fib(arg-1) + fib(arg-2);	  
+  }
+}
+
+int
+main(int argc, char* argv[])
+{
+    /* Number of arguments should be 2 */
+    if(argc == 2)
+    {
+        long xx = atol(argv[1]);
+        if(xx < 0)
+        {
+            printf("Usage: ./fib N , where N >= 0\n");
+            return 1;      
+        }
+        else
+        {    
+            long fibResult = fib(xx);
+            printf("fib(%ld) = %ld\n", xx , fibResult);
+            return 0;
+	}
+    }
+    else
+    {
+	printf("Usage: ./fib N , where N >= 0\n");
+        return 1;
+    }
+}
+#endif
+
   .text
 fib:
   enter $0 , $0
@@ -44,8 +88,14 @@ fib:
   leave 
   ret 
 
+/* variable mapping
+   long xx : %rdi  
+*/
+
 main:
   enter $0, $0
+  cmp $2 , %rdi
+  jne .usageLabel
   mov 8(%rsi) , %rdi
   mov $0 , %rbx
   call atol 
@@ -66,6 +116,7 @@ main:
   mov $usage_fmt, %rdi
   mov $0, %al
   call printf
+  mov $1 , %rax
 
 .endProgram:
   leave

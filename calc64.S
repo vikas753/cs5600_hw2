@@ -94,6 +94,7 @@ main:
   mov $add_fmt, %rdi
   mov $0, %al
   call printf
+  mov %r8 , %rax
   jmp .endProgram
 .minusLabel:
   mov %rsi , %r8        # r8 : op1
@@ -102,6 +103,7 @@ main:
   mov $sub_fmt, %rdi
   mov $0, %al
   call printf
+  mov %r8 , %rax
   jmp .endProgram
 .productLabel:
   mov %rsi , %r8        # r8 : op1
@@ -110,6 +112,7 @@ main:
   mov $mul_fmt, %rdi
   mov $0, %al
   call printf
+  mov %r8 , %rax
   jmp .endProgram
 .divLabel:
   mov %rdx , %r8         # r8  : op2
@@ -121,11 +124,13 @@ main:
   mov $div_fmt, %rdi
   mov $0, %al
   call printf
+  mov %r8 , %rax
   jmp .endProgram
 .usageLabel:   ## Usage subroutine
   mov $usage_fmt, %rdi
   mov $0, %al
   call printf
+  mov $-1 , %rax
 
 .endProgram:
   leave
@@ -136,5 +141,5 @@ add_fmt:  .string "%ld + %ld = %ld\n"
 sub_fmt:  .string "%ld - %ld = %d\n"
 mul_fmt:  .string "%ld * %ld = %d\n"
 div_fmt:  .string "%ld / %ld = %d\n"
-usage_fmt :  .string "./calc N op N \n"
+usage_fmt :  .string "Usage: ./calc64 N op N\n"
 test_fmt : .string "%ld \n"

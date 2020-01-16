@@ -91,7 +91,8 @@ main:
   cmpb $'*' , %ecx
   je .mulLabel    
   cmpb $'/' , %ecx
-  je .divLabel 
+  je .divLabel
+  jmp .usageLabel 
   jmp .endProgram
 .addLabel : 
   mov %edi , %ebx
@@ -101,6 +102,7 @@ main:
   push %esi
   push $add_fmt
   call printf
+  mov %edi , %eax
   jmp .endProgram
 .subLabel :
   mov %edi , %ebx
@@ -111,6 +113,7 @@ main:
   push %esi
   push $sub_fmt
   call printf
+  mov %edi , %eax
   jmp .endProgram
 .mulLabel :
   mov %edi , %ebx
@@ -120,6 +123,7 @@ main:
   push %esi
   push $mul_fmt
   call printf
+  mov %edi , %eax
   jmp .endProgram
 .divLabel : 
   mov $0 , %edx
@@ -134,14 +138,14 @@ main:
 .usageLabel:
     push $usage_fmt
     call printf
+    mov $-1 , %eax
 .endProgram:
     leave
     ret
 
     .data
-usage_fmt:   .string "Usage: ./calc32 N op N \n "
-test_fmt :   .string "%s \n"
-add_fmt  :   .string "%ld + %ld = %ld \n"
-sub_fmt  :   .string "%ld - %ld = %d \n"
-mul_fmt  :   .string "%ld * %ld = %ld \n"
-div_fmt  :   .string "%ld / %ld = %ld \n"
+usage_fmt:   .string "Usage: ./calc32 N op N\n "
+add_fmt  :   .string "%ld + %ld = %ld\n"
+sub_fmt  :   .string "%ld - %ld = %d\n"
+mul_fmt  :   .string "%ld * %ld = %ld\n"
+div_fmt  :   .string "%ld / %ld = %ld\n"

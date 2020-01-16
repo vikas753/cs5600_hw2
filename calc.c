@@ -17,9 +17,11 @@ void usage()
 int
 main(int argc, char* argv[])
 {
+  int result = 0;
   if(argc!=NUM_VALID_ARGS) 
   {
-    usage();	  
+    usage();
+    return -1;    
   }
   else
   { 
@@ -27,33 +29,39 @@ main(int argc, char* argv[])
     {
       int op1 = atoi(argv[1]);
       int op2 = atoi(argv[3]);
-
+   
       if(argv[2][0] == '+')
       {
-        printf("%ld + %ld = %ld \n" , op1 , op2 , (op1 + op2)); 
+        printf("%ld + %ld = %ld\n" , op1 , op2 , (op1 + op2));
+        result = op1 + op2;	
       }
       else if(argv[2][0] == '*')
       {
-	 printf("%ld * %ld = %ld \n" , op1 , op2 , (op1 * op2)); 
+	 printf("%ld * %ld = %ld\n" , op1 , op2 , (op1 * op2));
+	 result = op1 * op2; 
       }
       else if(argv[2][0] == '-')
       {
-         printf("%ld - %ld = %ld \n" , op1 , op2 , (op1 - op2)); 
+         printf("%ld - %ld = %ld\n" , op1 , op2 , (op1 - op2));
+	 result = op1 - op2; 
       }      
       else if(argv[2][0] == '/')
       {
-	 printf("%ld / %ld = %ld \n" , op1 , op2 , (op1 / op2)); 
+	 printf("%ld / %ld = %ld\n" , op1 , op2 , (op1 / op2));
+	 result = op1 / op2; 
       }
       else
       {
-	usage();      
+	usage();
+        return -1;	
       }
     }
     else
     {
-      usage();	    
+      usage();
+      return -1;      
     }    
   }
-  return 0;
+  return result;
 }
 
