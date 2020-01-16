@@ -62,6 +62,10 @@ variable mapping
 
 main:
   enter $0 , $0
+  push %rdx
+  push %rcx
+  push %r8
+  add $8 , %rsp
   cmp $4 , %rdi
   jne .usageLabel
   mov %rsi , %r8
@@ -133,6 +137,9 @@ main:
   mov $-1 , %rax
 
 .endProgram:
+  pop %r8
+  pop %rcx
+  pop %rdx
   leave
   ret
 

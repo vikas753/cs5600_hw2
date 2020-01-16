@@ -97,6 +97,8 @@ fib:
 
 main:
     enter $0, $0
+    push %ebx
+    push %ecx
     mov 8(%ebp) , %ecx
     cmp $2 , %ecx
     jne .usageLabel
@@ -125,7 +127,8 @@ main:
     call printf
 
 .endProgram:
-
+    pop %ecx
+    pop %ebx
     leave
     ret
 

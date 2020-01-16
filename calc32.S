@@ -65,6 +65,9 @@ main(int argc, char* argv[])
 
 main:
   enter $0 , $0
+  push %edx
+  push %ebx
+  push %ecx
   mov 8(%ebp) , %eax   # argc : %eax
   cmp $4 , %eax
   jne .usageLabel
@@ -140,6 +143,9 @@ main:
     call printf
     mov $-1 , %eax
 .endProgram:
+    pop %ecx
+    pop %ebx
+    pop %edx
     leave
     ret
 

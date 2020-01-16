@@ -94,6 +94,9 @@ fib:
 
 main:
   enter $0, $0
+  push %rbx
+  push %r8
+  add $16 , %rsp
   cmp $2 , %rdi
   jne .usageLabel
   mov 8(%rsi) , %rdi
@@ -119,6 +122,8 @@ main:
   mov $1 , %rax
 
 .endProgram:
+  pop %r8
+  pop %rbx
   leave
   ret
 
